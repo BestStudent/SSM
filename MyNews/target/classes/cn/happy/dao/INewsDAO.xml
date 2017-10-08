@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.happy.dao.INewsDAO" >
+
+  <resultMap id="BaseResultMap" type="cn.happy.entity.News" >
+    <id column="newsid" property="newsid" jdbcType="BIGINT" />
+    <result column="newstitle" property="newstitle" jdbcType="VARCHAR" />
+    <result column="newsContent" property="newscontent" jdbcType="VARCHAR" />
+    <result column="clickCount" property="clickcount" jdbcType="BIGINT" />
+  </resultMap>
+
+  <select id="findAllbypage" resultMap="BaseResultMap">
+    SELECT * FROM news limit #{thePageFirst},#{pageRow}
+  </select>
+
+  <select id="findAllCount" resultType="int">
+    select count(1) from news;
+  </select>
+
+  <select id="findOne" resultMap="BaseResultMap">
+    SELECT * FROM news WHERE newsid = #{newsid};
+  </select>
+
+  <select id="findTalk" resultType="Talk">
+    SELECT talk.`content`,talk.`talktime` FROM news,talk WHERE news.`newsid` = talk.`nid` AND news.`newsid` = #{tid}
+  </select>
+
+</mapper>

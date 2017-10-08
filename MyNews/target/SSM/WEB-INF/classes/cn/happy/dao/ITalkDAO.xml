@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.happy.dao.ITalkDAO" >
+  <resultMap id="BaseResultMap" type="cn.happy.entity.Talk" >
+    <id column="tid" property="tid" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="talktime" property="talktime" jdbcType="DATE" />
+    <result column="nid" property="nid" jdbcType="BIGINT" />
+  </resultMap>
+ <insert id="addTalk">
+   INSERT INTO `mynews`.`talk` (`content`, `talktime`, `nid`) VALUES (#{content},#{talktime},#{nid});
+ </insert>
+
+    <select id="findcishu" resultType="int">
+    SELECT COUNT(1) FROM talk WHERE talk.`nid` = #{pingluncishu}
+    </select>
+
+</mapper>

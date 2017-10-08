@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--HappYService对象-->
+    <bean id="ink" class="cn.print.ink.GrayInk"></bean>
+    <bean id="paper" class="cn.print.paper.B5Paper"></bean>
+    <bean id="printer" class="cn.print.print.Print">
+        <property name="paper" ref="paper"></property>
+        <property name="ink" ref="ink"></property>
+    </bean>
+
+
+</beans>
