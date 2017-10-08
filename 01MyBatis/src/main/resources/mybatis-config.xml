@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--<settings>
+        <setting name="autoMappingBehavior" value="NONE"/>
+    </settings>-->
+    <!--别名-->
+    <typeAliases>
+        <package name="cn.happy.entity"></package>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///dept"/>
+                <property name="username" value="root"/>
+                <property name="password" value=""/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--<mapper resource="cn/happy/dao/IDeptDao.xml"/>
+        <mapper resource="cn/happy/dao/BookDao.xml"/>
+        <mapper resource="cn/happy/dao/DeptNewDAO.xml"/>-->
+        <package name="cn.happy.dao"></package>
+    </mappers>
+</configuration>
