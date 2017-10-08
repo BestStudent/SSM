@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.one.dao.IUserDAO">
+    <!--设置resultmap-->
+    <resultMap id="myMapper" type="User">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uname"></result>
+        <result property="upwd" column="upwd"></result>
+        <result property="ucode" column="ucode"></result>
+        <result property="ugender" column="ugender"></result>
+        <result property="ubirthday" column="ubirthday"></result>
+        <result property="uphone" column="uphone"></result>
+        <result property="urole" column="urole"></result>
+        <result property="uaddress" column="uaddress"></result>
+    </resultMap>
+    <!--1.用于登录的查询-->
+    <select id="isLogin" resultType="User">
+        SELECT * FROM USER WHERE ucode=#{ucode} AND upwd=#{upwd}
+    </select>
+    <!--2.分页查询所有-->
+    <select id="findAllbypage" resultMap="myMapper">
+        SELECT * FROM USER
+        <where>
+            <if test="inputname!=null">
+                AND uname LIKE '%' #{inputname} '%'
+            </if>
+        </where>
+        limit #{thePageFirst},#{pageRow}
+    </select>
+    <!--3.查询所有-->
+    <select id="findAll" resultMap="myMapper">
+        SELECT * FROM USER
+    </select>
+    <!--4.查询总条数-->
+    <select id="findAllCount" resultType="int">
+       SELECT COUNT(*) FROM  USER
+        <where>
+            <if test="inputname!=null">
+                AND uname LIKE '%' #{inputname} '%'
+            </if>
+        </where>
+    </select>
+    <!--5.删除-->
+    <delete id="delOne">
+        DELETE FROM USER WHERE uid=#{uid}
+    </delete>
+    <!--6.增加-->
+    <insert id="addOne">
+        INSERT INTO USER (uname,upwd,ucode,ugender,ubirthday,uphone,urole,uaddress) VALUES(#{uname},#{upwd},#{ucode},#{ugender},#{ubirthday},#{uphone},#{urole},#{uaddress});
+    </insert>
+    <!--7.修改-->
+    <update id="updOne">
+         UPDATE user SET `uname` = #{uname} ,`ugender` = #{ugender} ,`ubirthday` = #{ubirthday} ,`uphone` = #{uphone} ,`urole` = #{urole} ,`uaddress` = #{uaddress} WHERE `uid` = #{uid};
+    </update>
+    <!--8.根据id查用户信息-->
+    <select id="findOne" resultType="User">
+        SELECT * FROM user where uid = #{uid}
+    </select>
+</mapper>
